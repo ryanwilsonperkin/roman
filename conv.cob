@@ -32,7 +32,8 @@ compute-decimal.
             when 'C' move 100 to curr-decimal
             when 'D' move 500 to curr-decimal
             when 'M' move 1000 to curr-decimal
-            when other move 2 to err.
+            when other move 2 to err
+        end-evaluate.
 
         add curr-decimal to result.
         if curr-decimal is greater than prev-decimal
