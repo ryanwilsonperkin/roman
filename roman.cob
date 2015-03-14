@@ -77,7 +77,8 @@ translate.
         else
             move result to out-eq
             move roman to out-r
-            write stdout-record from print-line.
+            write stdout-record from print-line
+        end-if.
 
 get-roman.
         move spaces to roman.
