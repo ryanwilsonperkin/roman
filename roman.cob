@@ -84,7 +84,8 @@ get-roman.
         move spaces to roman.
         write stdout-record from '>' after advancing 0 lines.
         read standard-input into roman
-            at end move 1 to eof.
+            at end move 1 to eof
+        end-read.
 
 compute-roman-len.
         move 0 to roman-len.
