@@ -26,12 +26,19 @@ procedure division using roman, roman-len, err, result.
 compute-decimal.
         evaluate s(i)
             when 'I' move 1 to curr-decimal
+            when 'i' move 1 to curr-decimal
             when 'V' move 5 to curr-decimal
+            when 'v' move 5 to curr-decimal
             when 'X' move 10 to curr-decimal
+            when 'x' move 10 to curr-decimal
             when 'L' move 50 to curr-decimal
+            when 'l' move 50 to curr-decimal
             when 'C' move 100 to curr-decimal
+            when 'c' move 100 to curr-decimal
             when 'D' move 500 to curr-decimal
+            when 'd' move 500 to curr-decimal
             when 'M' move 1000 to curr-decimal
+            when 'm' move 1000 to curr-decimal
             when other move 2 to err
         end-evaluate.
 
