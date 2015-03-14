@@ -1,91 +1,91 @@
-IDENTIFICATION DIVISION.
-PROGRAM-ID. ROMANNUMERALS.
+identification division.
+program-id. romannumerals.
 
-ENVIRONMENT DIVISION.
-INPUT-OUTPUT SECTION.
-FILE-CONTROL.
-    SELECT STANDARD-INPUT ASSIGN TO KEYBOARD.
-    SELECT STANDARD-OUTPUT ASSIGN TO DISPLAY.
+environment division.
+input-output section.
+file-control.
+    select standard-input assign to keyboard.
+    select standard-output assign to display.
 
-DATA DIVISION.
-FILE SECTION.
-FD STANDARD-INPUT.
-    01 STDIN-RECORD PICTURE X(80).
-FD STANDARD-OUTPUT.
-    01 STDOUT-RECORD PICTURE X(80).
+data division.
+file section.
+fd standard-input.
+    01 stdin-record picture x(80).
+fd standard-output.
+    01 stdout-record picture x(80).
 
-WORKING-STORAGE SECTION.
-77  EOF PICTURE 9 VALUE 0.
+working-storage section.
+77  eof picture 9 value 0.
 
-77  ROMAN-LEN PICTURE S99 USAGE IS COMPUTATIONAL.
-77  ERR PICTURE S9 USAGE IS COMPUTATIONAL-3.
-77  RESULT PICTURE S9(8) USAGE IS COMPUTATIONAL.
-01  ROMAN.
-    02 S PICTURE X(1) OCCURS 30 TIMES.
+77  roman-len picture s99 usage is computational.
+77  err picture s9 usage is computational-3.
+77  result picture s9(8) usage is computational.
+01  roman.
+    02 s picture x(1) occurs 30 times.
 
-01 ERROR-MSG.
-    02 FILLER PICTURE X(1) VALUE SPACE.
-    02 FILLER PICTURE X(22) VALUE 'ILLEGAL ROMAN NUMERAL'.
-    02 FILLER PICTURE X(1) VALUE SPACE.
-    02 ERROR-VAL PICTURE X(30).
+01 error-msg.
+    02 filler picture x(1) value space.
+    02 filler picture x(22) value 'Illegal Roman Numeral'.
+    02 filler picture x(1) value space.
+    02 error-val picture x(30).
 
-01  TITLE-LINE.
-    02 FILLER PICTURE X(11) VALUE SPACES.
-    02 FILLER PICTURE X(24) VALUE 'ROMAN NUMBER EQUIVALENTS'.
+01  title-line.
+    02 filler picture x(11) value spaces.
+    02 filler picture x(24) value 'Roman Number Equivalents'.
 
-01  UNDERLINE-1.
-    02 FILLER PICTURE X(45) VALUE 
+01  underline-1.
+    02 filler picture x(45) value 
        ' --------------------------------------------'.
 
-01  COL-HEADS.
-    02 FILLER PICTURE X(9) VALUE SPACES.
-    02 FILLER PICTURE X(12) VALUE 'ROMAN NUMBER'.
-    02 FILLER PICTURE X(13) VALUE SPACES.
-    02 FILLER PICTURE X(11) VALUE 'DEC. EQUIV.'.
+01  col-heads.
+    02 filler picture x(9) value spaces.
+    02 filler picture x(12) value 'Roman Number'.
+    02 filler picture x(13) value spaces.
+    02 filler picture x(11) value 'Dec. Equiv.'.
 
-01  UNDERLINE-2.
-    02 FILLER PICTURE X(45) VALUE
+01  underline-2.
+    02 filler picture x(45) value
        ' ------------------------------   -----------'.
 
-01  PRINT-LINE.
-    02 FILLER PICTURE X VALUE SPACE.
-    02 OUT-R  PICTURE X(30).
-    02 FILLER PICTURE X(3) VALUE SPACES.
-    02 OUT-EQ PICTURE Z(9).
+01  print-line.
+    02 filler picture x value space.
+    02 out-r  picture x(30).
+    02 filler picture x(3) value spaces.
+    02 out-eq picture z(9).
 
-PROCEDURE DIVISION.
-        OPEN INPUT STANDARD-INPUT, OUTPUT STANDARD-OUTPUT.
-        PERFORM PRINT-HEADER.
-        PERFORM TRANSLATE
-            UNTIL EOF IS EQUAL 1.
-        CLOSE STANDARD-INPUT, STANDARD-OUTPUT. 
-        STOP RUN.
+procedure division.
+        open input standard-input, output standard-output.
+        perform print-header.
+        perform translate
+            until eof is equal 1.
+        close standard-input, standard-output. 
+        stop run.
 
-PRINT-HEADER.
-        WRITE STDOUT-RECORD FROM TITLE-LINE.
-        WRITE STDOUT-RECORD FROM UNDERLINE-1.
-        WRITE STDOUT-RECORD FROM COL-HEADS.
-        WRITE STDOUT-RECORD FROM UNDERLINE-2.
+print-header.
+        write stdout-record from title-line.
+        write stdout-record from underline-1.
+        write stdout-record from col-heads.
+        write stdout-record from underline-2.
 
-TRANSLATE.
-        PERFORM GET-ROMAN.
-        PERFORM COMPUTE-ROMAN-LEN.
-        CALL "conv" USING ROMAN, ROMAN-LEN, ERR, RESULT.
-        IF ERR IS EQUAL 2
-            MOVE ROMAN TO ERROR-VAL
-            WRITE STDOUT-RECORD FROM ERROR-MSG
-        ELSE
-            MOVE RESULT TO OUT-EQ
-            MOVE ROMAN TO OUT-R
-            WRITE STDOUT-RECORD FROM PRINT-LINE.
+translate.
+        perform get-roman.
+        perform compute-roman-len.
+        call "conv" using roman, roman-len, err, result.
+        if err is equal 2
+            move roman to error-val
+            write stdout-record from error-msg
+        else
+            move result to out-eq
+            move roman to out-r
+            write stdout-record from print-line.
 
-GET-ROMAN.
-        MOVE SPACES TO ROMAN.
-        WRITE STDOUT-RECORD FROM '>' AFTER ADVANCING 0 LINES.
-        READ STANDARD-INPUT INTO ROMAN
-            AT END MOVE 1 TO EOF.
+get-roman.
+        move spaces to roman.
+        write stdout-record from '>' after advancing 0 lines.
+        read standard-input into roman
+            at end move 1 to eof.
 
-COMPUTE-ROMAN-LEN.
-        MOVE 0 TO ROMAN-LEN.
-        INSPECT FUNCTION REVERSE(ROMAN) TALLYING ROMAN-LEN FOR LEADING SPACES.
-        COMPUTE ROMAN-LEN = LENGTH OF ROMAN - ROMAN-LEN.
+compute-roman-len.
+        move 0 to roman-len.
+        inspect function reverse(roman) tallying roman-len for leading spaces.
+        compute roman-len = length of roman - roman-len.

@@ -1,41 +1,41 @@
-IDENTIFICATION DIVISION.
-PROGRAM-ID. conv.
+identification division.
+program-id. conv.
 
-DATA DIVISION.
-WORKING-STORAGE SECTION.
-77  I PICTURE S99 USAGE IS COMPUTATIONAL.
-77  PREV-DECIMAL PICTURE S9(4) USAGE IS COMPUTATIONAL.
-77  CURR-DECIMAL PICTURE S9(4) USAGE IS COMPUTATIONAL.
+data division.
+working-storage section.
+77  i picture s99 usage is computational.
+77  prev-decimal picture s9(4) usage is computational.
+77  curr-decimal picture s9(4) usage is computational.
 
-LINKAGE SECTION.
-77  ROMAN-LEN PICTURE S99 USAGE IS COMPUTATIONAL.
-77  ERR PICTURE S9 USAGE IS COMPUTATIONAL-3.
-77  RESULT PICTURE S9(8) USAGE IS COMPUTATIONAL.
-01  ROMAN.
-    02 S PICTURE X(1) OCCURS 30 TIMES.
+linkage section.
+77  roman-len picture s99 usage is computational.
+77  err picture s9 usage is computational-3.
+77  result picture s9(8) usage is computational.
+01  roman.
+    02 s picture x(1) occurs 30 times.
 
-PROCEDURE DIVISION USING ROMAN, ROMAN-LEN, ERR, RESULT.
-        MOVE ZERO TO RESULT.
-        MOVE 1001 TO PREV-DECIMAL.
-        MOVE 1 TO ERR.
-        PERFORM COMPUTE-DECIMAL
-            VARYING I FROM 1 BY 1
-            UNTIL I IS GREATER THAN ROMAN-LEN OR ERR = 2.
-        GOBACK.
+procedure division using roman, roman-len, err, result.
+        move zero to result.
+        move 1001 to prev-decimal.
+        move 1 to err.
+        perform compute-decimal
+            varying i from 1 by 1
+            until i is greater than roman-len or err = 2.
+        goback.
 
-COMPUTE-DECIMAL.
-        EVALUATE S(I)
-            WHEN 'I' MOVE 1 TO CURR-DECIMAL
-            WHEN 'V' MOVE 5 TO CURR-DECIMAL
-            WHEN 'X' MOVE 10 TO CURR-DECIMAL
-            WHEN 'L' MOVE 50 TO CURR-DECIMAL
-            WHEN 'C' MOVE 100 TO CURR-DECIMAL
-            WHEN 'D' MOVE 500 TO CURR-DECIMAL
-            WHEN 'M' MOVE 1000 TO CURR-DECIMAL
-            WHEN OTHER MOVE 2 TO ERR.
+compute-decimal.
+        evaluate s(i)
+            when 'I' move 1 to curr-decimal
+            when 'V' move 5 to curr-decimal
+            when 'X' move 10 to curr-decimal
+            when 'L' move 50 to curr-decimal
+            when 'C' move 100 to curr-decimal
+            when 'D' move 500 to curr-decimal
+            when 'M' move 1000 to curr-decimal
+            when other move 2 to err.
 
-        ADD CURR-DECIMAL TO RESULT.
-        IF CURR-DECIMAL IS GREATER THAN PREV-DECIMAL
-            COMPUTE RESULT = RESULT - 2 * PREV-DECIMAL
-        END-IF.
-        MOVE CURR-DECIMAL TO PREV-DECIMAL.
+        add curr-decimal to result.
+        if curr-decimal is greater than prev-decimal
+            compute result = result - 2 * prev-decimal
+        end-if.
+        move curr-decimal to prev-decimal.
