@@ -72,7 +72,6 @@ TRANSLATE.
         IF ERR IS EQUAL 2
             MOVE ROMAN TO ERROR-VAL
             WRITE STDOUT-RECORD FROM ERROR-MSG
-            MOVE 0 TO OUT-EQ
         ELSE
             MOVE RESULT TO OUT-EQ
             MOVE ROMAN TO OUT-R
