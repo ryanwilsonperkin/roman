@@ -35,9 +35,13 @@ working-storage section.
     02 filler picture x(34) value 
        '----------------------------------'.
 
+01  prompt-line.
+    02 filler picture x(23) value 'Enter a roman numeral:'.
+
 01  print-line.
+    02 filler picture x(9) value 'Entered: '.
     02 out-r  picture x(30).
-    02 filler picture x(1) value spaces.
+    02 filler picture x(13) value ' Translated: '.
     02 out-eq picture z(5).
 
 procedure division.
@@ -53,6 +57,7 @@ print-title.
         write stdout-record from title-underline.
 
 translate.
+        perform write-prompt.
         perform get-roman.
         perform compute-roman-len.
         call "conv" using roman, roman-len, err, result.
@@ -64,6 +69,10 @@ translate.
             move roman to out-r
             write stdout-record from print-line
         end-if.
+
+write-prompt.
+       write stdout-record from prompt-line.
+       write stdout-record from '> ' after advancing 0 lines.
 
 get-roman.
         move spaces to roman.
