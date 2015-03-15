@@ -48,15 +48,18 @@ working-storage section.
 
 procedure division.
         open input standard-input, output standard-output.
+        perform print-title.
         perform print-header.
         perform translate
             until eof is equal 1.
         close standard-input, standard-output. 
         stop run.
 
-print-header.
+print-title.
         write stdout-record from title-line.
         write stdout-record from title-underline.
+
+print-header.
         write stdout-record from col-heads.
 
 translate.
