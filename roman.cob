@@ -19,7 +19,7 @@ working-storage section.
 
 77  roman-len picture s99 usage is computational.
 77  err picture s9 usage is computational-3.
-77  result picture s9(8) usage is computational.
+77  result picture s9(5) usage is computational.
 01  roman.
     02 s picture x(1) occurs 30 times.
 
@@ -44,7 +44,7 @@ working-storage section.
 01  print-line.
     02 out-r  picture x(30).
     02 filler picture x(1) value spaces.
-    02 out-eq picture z(9).
+    02 out-eq picture z(5).
 
 procedure division.
         open input standard-input, output standard-output.

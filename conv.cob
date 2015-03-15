@@ -10,7 +10,7 @@ working-storage section.
 linkage section.
 77  roman-len picture s99 usage is computational.
 77  err picture s9 usage is computational-3.
-77  result picture s9(8) usage is computational.
+77  result picture s9(5) usage is computational.
 01  roman.
     02 s picture x(1) occurs 30 times.
 
