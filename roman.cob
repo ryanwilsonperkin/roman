@@ -46,40 +46,59 @@ working-storage section.
 
 procedure division.
         open input standard-input, output standard-output.
+*       Print title initially
         perform print-title.
+
+*       Loop translation section until end of file is reached
         perform translate
             until eof is equal 1.
         close standard-input, standard-output. 
         stop run.
 
+* Print title to stdout
 print-title.
         write stdout-record from title-line.
         write stdout-record from title-underline.
 
+* Run translation program once
+* Get input, translate, and print output
 translate.
         perform write-prompt.
         perform get-roman.
         perform compute-roman-len.
+
+*       External call to conv module
         call "conv" using roman, roman-len, err, result.
+
+*       Check return value of external call
         if err is equal 2
+
+*           Print error message if external call failed (code: 2)
             move roman to error-val
             write stdout-record from error-msg
         else
+*           Print regular line if external call succeeded
             move result to out-eq
             move roman to out-r
             write stdout-record from print-line
         end-if.
 
+* Write an input prompt to stdout
 write-prompt.
        write stdout-record from prompt-line.
        write stdout-record from '> ' after advancing 0 lines.
 
+* Get roman numeral from stdin into roman data structure
+* Maximum size read from stdin is 30 characters
+* Set eof to 1 if end of file is reached
 get-roman.
         move spaces to roman.
         read standard-input into roman
             at end move 1 to eof
         end-read.
 
+* Compute length of string in roman data structure
+* Count the number of trailing spaces and subtract from total size
 compute-roman-len.
         move 0 to roman-len.
         inspect function reverse(roman) tallying roman-len for leading spaces.
