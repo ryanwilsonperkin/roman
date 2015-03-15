@@ -30,27 +30,20 @@ working-storage section.
     02 error-val picture x(30).
 
 01  title-line.
-    02 filler picture x(11) value spaces.
-    02 filler picture x(24) value 'Roman Number Equivalents'.
+    02 filler picture x(34) value 'Roman Number To Decimal Translator'.
 
-01  underline-1.
-    02 filler picture x(45) value 
-       ' --------------------------------------------'.
+01  title-underline.
+    02 filler picture x(34) value 
+       '----------------------------------'.
 
 01  col-heads.
-    02 filler picture x(9) value spaces.
     02 filler picture x(12) value 'Roman Number'.
-    02 filler picture x(13) value spaces.
-    02 filler picture x(11) value 'Dec. Equiv.'.
-
-01  underline-2.
-    02 filler picture x(45) value
-       ' ------------------------------   -----------'.
+    02 filler picture x(19) value spaces.
+    02 filler picture x(11) value 'Decimal'.
 
 01  print-line.
-    02 filler picture x value space.
     02 out-r  picture x(30).
-    02 filler picture x(3) value spaces.
+    02 filler picture x(1) value spaces.
     02 out-eq picture z(9).
 
 procedure division.
@@ -63,9 +56,8 @@ procedure division.
 
 print-header.
         write stdout-record from title-line.
-        write stdout-record from underline-1.
+        write stdout-record from title-underline.
         write stdout-record from col-heads.
-        write stdout-record from underline-2.
 
 translate.
         perform get-roman.
@@ -82,7 +74,6 @@ translate.
 
 get-roman.
         move spaces to roman.
-        write stdout-record from '>' after advancing 0 lines.
         read standard-input into roman
             at end move 1 to eof
         end-read.
