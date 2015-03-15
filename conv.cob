@@ -15,14 +15,22 @@ linkage section.
     02 s picture x(1) occurs 30 times.
 
 procedure division using roman, roman-len, err, result.
+*       Initialize result value to 0, will be added to
         move zero to result.
+
+*       Initialize prev-decimal larger than any other possible value
         move 1001 to prev-decimal.
+
+*       Initialize error result to 0 (no error)
         move 0 to err.
+
+*       Run decimal computation on each character
         perform compute-decimal
             varying i from 1 by 1
             until i is greater than roman-len or err = 1.
         goback.
 
+* Translate the current roman numeral character into a decimal value
 compute-decimal.
         evaluate s(i)
             when 'I' move 1 to curr-decimal
@@ -43,6 +51,9 @@ compute-decimal.
         end-evaluate.
 
         add curr-decimal to result.
+ 
+*       If we previously saw smaller value, it should have been subtracted
+*       Make up for it by subtracting previous value twice
         if curr-decimal is greater than prev-decimal
             compute result = result - 2 * prev-decimal
         end-if.
