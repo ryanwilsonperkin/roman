@@ -24,8 +24,7 @@ working-storage section.
     02 s picture x(1) occurs 30 times.
 
 01 error-msg.
-    02 filler picture x(1) value space.
-    02 filler picture x(22) value 'Illegal Roman Numeral'.
+    02 filler picture x(22) value 'Invalid Roman Numeral:'.
     02 filler picture x(1) value space.
     02 error-val picture x(30).
 
