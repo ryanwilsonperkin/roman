@@ -71,9 +71,9 @@ translate.
         call "conv" using roman, roman-len, err, result.
 
 *       Check return value of external call
-        if err is equal 2
+        if err is equal 1
 
-*           Print error message if external call failed (code: 2)
+*           Print error message if external call failed (code: 1)
             move roman to error-val
             write stdout-record from error-msg
         else

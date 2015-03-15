@@ -17,10 +17,10 @@ linkage section.
 procedure division using roman, roman-len, err, result.
         move zero to result.
         move 1001 to prev-decimal.
-        move 1 to err.
+        move 0 to err.
         perform compute-decimal
             varying i from 1 by 1
-            until i is greater than roman-len or err = 2.
+            until i is greater than roman-len or err = 1.
         goback.
 
 compute-decimal.
@@ -39,7 +39,7 @@ compute-decimal.
             when 'd' move 500 to curr-decimal
             when 'M' move 1000 to curr-decimal
             when 'm' move 1000 to curr-decimal
-            when other move 2 to err
+            when other move 1 to err
         end-evaluate.
 
         add curr-decimal to result.
