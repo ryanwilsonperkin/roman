@@ -35,11 +35,6 @@ working-storage section.
     02 filler picture x(34) value 
        '----------------------------------'.
 
-01  col-heads.
-    02 filler picture x(12) value 'Roman Number'.
-    02 filler picture x(19) value spaces.
-    02 filler picture x(11) value 'Decimal'.
-
 01  print-line.
     02 out-r  picture x(30).
     02 filler picture x(1) value spaces.
@@ -48,7 +43,6 @@ working-storage section.
 procedure division.
         open input standard-input, output standard-output.
         perform print-title.
-        perform print-header.
         perform translate
             until eof is equal 1.
         close standard-input, standard-output. 
@@ -57,9 +51,6 @@ procedure division.
 print-title.
         write stdout-record from title-line.
         write stdout-record from title-underline.
-
-print-header.
-        write stdout-record from col-heads.
 
 translate.
         perform get-roman.
